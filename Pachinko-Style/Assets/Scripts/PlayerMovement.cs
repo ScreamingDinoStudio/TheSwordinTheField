@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 mousePosition;
     Vector3 initialPosition;
     private bool wasTheBallReleased = false;
-    private bool mouseHeld = false;
+
 
     Animator animator;
 
@@ -27,11 +27,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Whereto() 
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            mouseHeld = true;
-        }
-        if (!wasTheBallReleased && mouseHeld)
+
+        if (!wasTheBallReleased)
         {
             mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 40));
             transform.position = new Vector3(mousePosition.x, initialPosition.y, initialPosition.z);
@@ -43,7 +40,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetMouseButtonUp(0)) 
         {   wasTheBallReleased=true;
-            mouseHeld = false;
             GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;   
         }    
     }
